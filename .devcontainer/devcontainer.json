@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/anaconda
+{
+	"name": "Anaconda (Python 3)",
+	"build": { 
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
+	"mounts": [
+		"type=bind,source=/etc/pip.conf,target=/etc/pip.conf" // mount the pip.conf from the VM to get the nexus config
+	],
+	// commented out below features as no access to ghcr.io
+	// options - if needed - are to prebuild the DC with features baken in, and stash it in a private ACR, or 
+	// push the OCI artefacts into a private ACR and reference them as features here.
+	/*"features": {
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"azureDnsAutoDetection": true,
+			"installDockerBuildx": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v1"
+		}
+	},*/
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pip install -r requirements.txt"
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
